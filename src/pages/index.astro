@@ -1,11 +1,53 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Página de cuenta atrás para PrecioLuzHoy (Astro)
+const title = "Lanzamiento 28·10·2025 10:10 — PrecioLuzHoy";
+const description = "La luz se enciende el 28·10·2025 a las 10:10. Claridad diaria para ahorrar.";
 ---
-
-<Layout>
-	<Welcome />
-</Layout>
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta property="og:title" content="PrecioLuzHoy — Lanzamiento 28·10·2025 10:10" />
+    <meta property="og:description" content="La luz se enciende el 28·10·2025 a las 10:10." />
+    <style>
+      :root { --bg1:#060b12; --bg2:#0f1f2f; --accent:#7ee1ff; --muted:#b7c7d6;}
+      *{box-sizing:border-box} body{
+        margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+        background: radial-gradient(1200px 600px at 50% -10%, var(--accent)10%, transparent 60%),
+                    linear-gradient(160deg,var(--bg1),var(--bg2));
+        color:#eaf6ff; font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,sans-serif; text-align:center; padding:24px;
+      }
+      h1{font-weight:700; margin:0 0 .25rem}
+      h2{font-weight:500; margin:.25rem 0 1rem; color:var(--muted)}
+      .pill{display:inline-block; padding:.35rem .7rem; border:1px solid rgba(255,255,255,.18); border-radius:999px; font-size:.9rem; opacity:.9}
+      #cd{font-variant-numeric:tabular-nums; font-size:1.6rem; margin:1.25rem 0}
+      footer{margin-top:1.25rem; font-size:.9rem; color:var(--muted); opacity:.9}
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="pill">⚡ PrecioLuzHoy · 28·10·2025 · 10:10</div>
+      <h1>La luz se enciende</h1>
+      <h2>Claridad diaria para decidir mejor y pagar menos.</h2>
+      <div id="cd">···</div>
+      <footer>Parte de la Tríada: Luz · Oro · Conocimiento</footer>
+    </main>
+    <script>
+      const target=new Date("2025-10-28T10:10:00");
+      const cd=document.getElementById("cd");
+      function tick(){
+        const d=target - new Date();
+        if(d<=0){ cd.textContent="🌕 Hoy es el día."; return; }
+        const DD=Math.floor(d/86400000);
+        const HH=Math.floor((d/3600000)%24);
+        const MM=Math.floor((d/60000)%60);
+        cd.textContent=`${DD} días · ${HH} h · ${MM} min`;
+        setTimeout(tick, 30000);
+      } tick();
+    </script>
+  </body>
+</html>
